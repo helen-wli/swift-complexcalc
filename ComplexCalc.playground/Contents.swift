@@ -106,14 +106,6 @@ class Calculator {
         return sum / arrayInts.count
     }
     
-    
-    
-    
-    
-    
-    /* NOT WORKING YET
-       COMMENTING: line 150 - 153, 164 - 169
-    
     // `mathOp` functions
     
     // takes two integers lhs and rhs and an anonymous function which defines a mathematical
@@ -126,21 +118,22 @@ class Calculator {
     // takes an array of integers, an integer beg, and an anonymous function
     // the given function defines a mathematical operation, the given integer beg defines
     // the value to begin with, and the integer array gives the rest values to continue on
+    // in later operations
     // (see detailed examples in the testing section below)
     func mathOp(args: [Int], beg: Int, op: (Int, Int) -> Int) -> Int {
-        var lhs = 0
+        var lhs = beg
         for val in args {
             lhs = op(lhs, val)
         }
+        // when exit the loop above, the lhs value is also the final result
         return lhs
     }
-     
-     */
 }
 
 let calc = Calculator()  // Don't change this declaration name; it's used in all the tests below
 
 // ====> Add your own tests here if you wish <====
+
 
 // ====> Do not modify code in this section <====
 calc.add(lhs: 2, rhs: 2) == 4
@@ -148,10 +141,10 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-//calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
-//    // This style is one way of writing an anonymous function
-//calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
-//    // This is the second, more terse, style; either works
+calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
+    // This style is one way of writing an anonymous function
+calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
+    // This is the second, more terse, style; either works
 
 calc.add([1, 2, 3, 4, 5]) == 15
 calc.multiply([1, 2, 3, 4, 5]) == 120
@@ -161,12 +154,12 @@ calc.avg([2, 2, 2, 2, 2, 2]) == 2
 calc.avg([1, 2, 3, 4, 5]) == 3
 calc.avg([1]) == 1
 
-//calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 + $1 }) == 6
-//    // this is (((0 op 1) op 2) op 3)
-//calc.mathOp(args: [1, 2, 3, 4, 5], beg: 0, op: { $0 + $1 }) == 15
-//    // this is (((((0 op 1) op 2) op 3) op 4) op 5)
-//calc.mathOp(args: [1, 1, 1, 1, 1], beg: 1, op: { $0 * $1 }) == 1
-//    // this is (((((1 op 1) op 1) op 1) op 1) op 1)
+calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 + $1 }) == 6
+    // this is (((0 op 1) op 2) op 3)
+calc.mathOp(args: [1, 2, 3, 4, 5], beg: 0, op: { $0 + $1 }) == 15
+    // this is (((((0 op 1) op 2) op 3) op 4) op 5)
+calc.mathOp(args: [1, 1, 1, 1, 1], beg: 1, op: { $0 * $1 }) == 1
+    // this is (((((1 op 1) op 1) op 1) op 1) op 1)
 
 let p1 = (5, 5)
 let p2 = (12, -27)
